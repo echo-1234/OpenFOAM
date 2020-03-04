@@ -73,4 +73,43 @@ The `0` sub-directory contains 2 files, `p` and `U`, one for each of the pressur
     type empty;
   }
  }
+ ```
  
+ ## Pysical properties
+ The physical properties for the case are stored in dictionaries whose names are given the suffix `…Properties`, located in the `Dictionaries` directory tree
+
+_icoFoam_
+kinematic viscosity (keyword `nu`) stored in `transportProperties` dictionary
+```
+nu    [0 2 -1 0 0 0 0] 0.01;
+```
+
+## Control
+`controlDict` dictionary as case control files under `system` directory
+start at t=0 and OpenFOAM read field data from dicrectory `0`
+```
+application  icoFoam;
+
+startFrom startTime;
+startTime 0;
+stopAt    endTime;
+endTime   0.5;
+deltaT    0.005; //time step
+
+writeControl    timeStep;
+writeInterval   20;
+purgeWrite      0;
+writeFormat     ascii;
+writePrecision  6;
+writeCompression off;
+timeFormat      general;
+timePrecision   6;
+runTimeModifiable true;
+```
+deltaT value need to meet the criterion that the _Courant number < 1_
+![alt text](https://cdn.cfd.direct/docs/user-guide-v4/img/user23x.png)
+
+## Discretization and linear-solver settings
+`\system\fvSchemes` dictionary: user specifies the choice of finite volume discretisation schemes 
+`\system\fvSolution` dictionary: specify the linear equation solver and tolerance and other algorithm controls.
+> `PISO` sub-sictionary: `pRefCell` and `pRefValue` ( Changing either of these values will change the absolute pressure field, but not the relative pressures or velocity field.)
