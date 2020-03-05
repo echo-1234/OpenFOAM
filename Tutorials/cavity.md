@@ -1,7 +1,7 @@
+# Pre-processing
+
 ## Create mesh
-
 `blockMesh`
-
 > generates meshes from a description specified in an input dictionary, 
 > `blockMeshDict` located in the `system` (or `constant/polyMesh`) directory for a given case.
 
@@ -113,3 +113,36 @@ deltaT value need to meet the criterion that the _Courant number < 1_
 `\system\fvSchemes` dictionary: user specifies the choice of finite volume discretisation schemes 
 `\system\fvSolution` dictionary: specify the linear equation solver and tolerance and other algorithm controls.
 > `PISO` sub-sictionary: `pRefCell` and `pRefValue` ( Changing either of these values will change the absolute pressure field, but not the relative pressures or velocity field.)
+
+# ~~Viewing the mesh~~
+__This method does not work for HPC, see post-processing below__
+__ParaView__\
+- within the case directory\
+  ```
+  paraFoam & \\'&' run the executable in the background as it is convenient to keep ParaView while runnig
+  ```
+- launch from other directory\
+```
+paraFoam -case $FORM_RUN/cavity &  //change the path accordingly
+```
+
+Before clicking the _Apply_ button to load the geometry into _ParaView_, the user needs to select some geometry from the _Mesh Parts_ panel
+
+# Running an application
+- case directory
+  `icoFoam`
+- command prompt with optional -case and case directory
+  `icoFoam -case $FOAM_RUN/cavity`
+> The progress of the job is written to the terminal window. It tells the user the current time, maximum Courant number, initial and final residuals for all fields.
+
+# Post-processing
+- convert to VTK\
+  `foamtoVTK` 
+  > VTK is paraview format
+  
+  `paraview &` to run paraview in background
+
+- run directly\
+  Alternatively,\
+  Create an empty text file in main case directory, <name>.foam (for example: cavity.foam)\
+  Then `paraview cavity.foam &`
