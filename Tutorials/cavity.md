@@ -1,3 +1,5 @@
+Based on openfoam 3.0.1 packge in NUS HPC environment
+
 > __This tutorial cover the following__
 > - Simple mesh creation and boundary condition initiation
 > - setup the control (calculate delta_t from _Courant number_ limit), the property and solver selection
@@ -5,7 +7,8 @@
 > - using paraView for postprocessing
 > - mapping coarser mesh results into finer mesh and compare
 > - mesh grading (including mesh size estimation and deltaT from Courant) and setup 
-> - High Reynolds number problem with __standard k-e__ under __`pisoFoam` solver__
+> - High Reynolds number problem with __standard k-e__ under __`pisoFoam` solver__ (with estimation for k and e boudnary conditions)
+> - changing the geometry and inconsistent mapping
 
 
 # Pre-processing
@@ -315,10 +318,28 @@ The choice of wall function models are specified through the turbulent viscosity
  
  ## run 
  `pisoFoam`\
- since the Courant number stays below 0.2, it is sensible to increase `deltaT` to 0.02s so that the Courant number is closer to 1 (faster calculation) and change the start and stop time to cotinue running (`endTime 20.0`)
+ since after ~100 time steps, the Courant number stays below 0.2, it is sensible to increase `deltaT` to 0.02s so that the Courant number is closer to 1 (faster calculation) and change the start and stop time to cotinue running (`endTime 20.0`)
  > View the results at consecutive time steps as the solution progresses to see if the solution converges to a steady-state or perhaps reaches some periodically oscillating state. In the latter case, convergence may never occur but this does not mean the results are inaccurate.
  
+ # Change the case geometry
+ However the `mapFields` utility can map fields that are inconsistent, either in terms of geometry or boundary types or both.\
+ `cp -r $FOAM_TUTORIALS/incompressible/icoFoam/cavityClipped .`\
+ `blockMesh`
  
-  
-  
-  
+ ## __inconsistent mapping__
+> In an inconsistent mapping, there is no guarantee that all the field data can be mapped from the source case. The remaining data must come from field files in the target case itself. Therefore field data must exist in the time directory of the target case before mapping takes place. In the cavityClipped case the mapping is set to occur at time 0.5 s, since the startTime is set to 0.5 s in the controlDict. Therefore the user needs to copy initial field data to that directory.\
+1.  `cp -r 0 0.5`\
+2. Edit the _mapFieldsDict_ under _system_ directory
+```
+patchMap        ( lid movingWall ); // (<target source>)
+
+cuttingPatches  ( );//  empty means no mapping. 
+```
+  > - The `patchMap` list contains a mapping of patches from the source fields to the target fields. It is used if the user wishes a patch in the target field to inherit values from a corresponding patch in the source field.
+  > - The cuttingPatches list contains names of target patches whose values are to be mapped from the source internal field through which the target patch cuts.\
+  In this case, the fixedWalls patch is a noSlip condition so the internal values cannot be interpolated to the patch. Therefore the cuttingPatches list can simply be empty; If the user does wish to interpolate internal values from the source case to the fixedWalls patch in the target case, a fixedValue boundary condition needs to be specified on the patch, whose value can then be overridden during the mapping process; the fixedWalls patch then needs to be included in the cuttingPatches list.
+3. map
+`mapFields ../cavity`
+
+## run
+   `icoFoam`
