@@ -19,7 +19,8 @@ Based on openfoam 3.0.1 packge in NUS HPC environment
 > `blockMeshDict` located in the `system` (or `constant/polyMesh`) directory for a given case.
 
 `FoamFile` sub-dictionary\
-`blockMeshDic`
+`blockMeshDict`
+- `convertToMeters 0.001;` The constant should be multiplied with the dimensions to change them to meter (SI unit of length).
 - The file first specifies coordinates of the block vertices (vertice numeber starting from 0); 
 - it then defines the blocks (here, only 1) from the vertex labels and the number of cells within it.\
   ` simpleGrading (1 2 3)` cell expansion ratios (between the first to the last cell) in x1, x2, x3 directions
