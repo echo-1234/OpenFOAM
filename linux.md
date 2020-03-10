@@ -15,3 +15,6 @@
 
 `cp -r <source file> .` copy the source file or directory into the current directory\
 `cp -r <source> <target directory>` copy source to target
+
+`mv <source> <target>` move source to target directory\
+`mv <folder1> <folder2> <target>`
