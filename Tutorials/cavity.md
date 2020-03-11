@@ -35,7 +35,7 @@ The `0` sub-directory contains 2 files, `p` and `U`, one for each of the pressur
  3 entries
  
  `dimensions [0 2 -2 0 0 0 0]; `\
- |mass |length |time |temperature| quantity [mol] |current |luminous| intensity|
+ | mass | length | time | temperature| quantity [mol] | current | luminous| intensity |
  
  `internalField uniform 0;`\
  _uniform_ define by single value `internalField uniform <entry>;`
