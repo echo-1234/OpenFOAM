@@ -47,4 +47,16 @@ lists are specified with keywords under classes
   ## constant directory
   ## system directory
   
+  # Solver setup
+  ## reacting flow
+  1. _constant/thermoPhysicalProperties_ 
+  2. _constant/reactions_ specify species and reactions
+  3. _constant/thermo.compressibleGas_ specify coefficients of each species, the number of species is listed in this file
+    > - In the _thermodynamics_ sub-dictionary the janaf polynomial model coefficients for calculating the heat capacity can be found 
+    > - in _transport_ the sutherland model coefficients for viscosity are stored.
+    > - _$FOAM_ETC/thermoData/thermoData_ store the coeffecients to be used for heat capacity with the corrected file. 
+  1. initialization _0_ with all the species and boundary conditions
+  
+  # porous media
+  $FOAM_ETC/caseDicts/general/fvOptions/porosity/porousZone
 
