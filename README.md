@@ -38,9 +38,12 @@ lists are specified with keywords under classes
   - file _turbulentPropertied_: turbulence model selection
   
   ## Initial condition file (_0_)
-  `dimensions ` specify units
-  `internalField`: _uniform_ or _nonuninform_
-  `boundaryField`: _zeroGradient_ (Neumann boundary condition); _fixedValue_ (Dirichlet boundary); _empty_: for sides vertical to the direction not considered (eg, 2D simulation)
+  - `dimensions ` specify units [  mass  length  time  temperature quantity [mol]  current  luminous intensity ]
+  - `internalField`: _uniform_ or _nonuninform_
+  - `boundaryField`: \
+     _zeroGradient_ (Neumann boundary condition); _fixedValue_ (Dirichlet boundary); _empty_: for sides vertical to the direction not considered (eg, 2D simulation);\
+     The name of all the boundaries corresponds to those in _blockMeshDict_ or _constant/polyMesh/boundary_ after mesh is generated.
+   
   ## constant directory
   ## system directory
   
