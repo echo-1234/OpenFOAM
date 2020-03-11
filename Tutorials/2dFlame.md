@@ -1,6 +1,6 @@
 > This tutorial contains information
 > - Setting up reacting mixture and reactions
-> - changing dt
+> - variable time step
 
 
 
