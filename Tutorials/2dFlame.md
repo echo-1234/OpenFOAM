@@ -102,6 +102,7 @@ A cube(2D), the left supply with methane, the right supply with air, the front a
 ## _system_
    - _controlDict_
      ```
+     runTimeModifiable true;
      adjustTimeStep  yes;
      maxCo           0.4;
      ```
@@ -110,3 +111,8 @@ A cube(2D), the left supply with methane, the right supply with air, the front a
      writeControl adjustableRunTime;
      writeInterval 10; //10s interval
      ```
+
+# Adding new species
+1. edit _constant/thermos.compressibleGas_
+2. edit _constant/reactions_
+3. add initialization file in _0_
