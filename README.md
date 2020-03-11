@@ -50,7 +50,8 @@ lists are specified with keywords under classes
   # Solver setup
   ## reacting flow
   1. _constant/thermoPhysicalProperties_ 
-  2. _constant/reactions_ specify species and reactions
+  2. _constant/reactions_ specify species and reactions\
+     Arrehnius type: supply A, b and E/R
   3. _constant/thermo.compressibleGas_ specify coefficients of each species, the number of species is listed in this file
     > - In the _thermodynamics_ sub-dictionary the janaf polynomial model coefficients for calculating the heat capacity can be found 
     > - in _transport_ the sutherland model coefficients for viscosity are stored.
