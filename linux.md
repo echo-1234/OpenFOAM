@@ -5,6 +5,9 @@
 `nano <file>` open and edit the text file in a simple form
 `> <file>.foam` can create new file
 
+`ls` list the content
+`ls -R` list recursively, all the content with subdirectory contents will be listed. 
+
 
 
 ## directories and file operation
@@ -18,3 +21,6 @@
 
 `mv <source> <target>` move source to target directory\
 `mv <folder1> <folder2> <target>`
+
+`cat` : It is used to create the file with content.
+`touch` : It is used to create a file without any content. 
