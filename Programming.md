@@ -11,7 +11,7 @@ OpenFOAM程序最基本的架构。每个程序会通过单独一个文件夹来
 - options用来指定OpenFOAM需要调用的外挂库的路径以及名称；
 
 # Compile
-## edit _Make/file_
+## edit _Make/files_
 
 ```
 myFirstFoam.C
@@ -21,6 +21,22 @@ EXE = $(FOAM_USER_APPBIN)/myFirstFoam
 > - specify which file to compile
 > - instruction on whether compile to executable (`EXE =`) or libraries (`LIB =`)
 > - `EXE` means executable, followed by the file name
+## edit _Make/options_
+to include the __path__ and __name__ for the external libraries
+```
+EXE_INC = \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/meshTools/lnInclude
+    
+```
+> - `\` is used for changing lines in OpenFOME, otherwise error message will display _Make/linux64GccDPInt32Opt/options:54: *** missing separator_
+> - `EXE_INC =` is followed by the path of the header file included in the codes
+> - `$(LIB_SRC)` is an environmental varable, equivalent to `$(FOAM_SRC)` in OpenFOAM
 
-## `wmake`
+
+## `wmake` compile under Openfoam structure
+`wclean` is used to clean up the environment.
+
+# Run
+## `./<executable>` to run
    
