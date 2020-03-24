@@ -39,4 +39,34 @@ EXE_INC = \
 
 # Run
 ## `./<executable>` to run
+
+# Basic Commands
+- `volScalarField` scalar
+- `volVectorField`  vector field
+- `fvScalarMatrix` example linear system of turbulent kinetic energy ??
+- `autoPr` OpenFoam smart pointer
+- `processor` processor type; parallel running process type
+___for_ loop__
+```
+int results = 0;
+
+for (int k = 1, k < 11, k++)
+{
+    results = results + k;    
+}
+```
+___while_ loop_
+> used for velocity and pressure iterative correction 
+```
+while (nOuterCorrectors < 3)
+{
+    pCorr();
+}
+```
+
+___if___
+
+__logic__
+`&&` and; `||` or
+
    
